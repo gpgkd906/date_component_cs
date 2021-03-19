@@ -1,0 +1,19 @@
+name: Backlog Notify
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  backlog:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Backlog Notify
+        uses: bicstone/backlog-notify@master
+        env:
+          PROJECT_KEY: PF
+          API_HOST: chen.backlog.jp
+          API_KEY: ${{ secrets.BACKLOG_ISSUE }}

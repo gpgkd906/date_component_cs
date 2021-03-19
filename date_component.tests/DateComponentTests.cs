@@ -50,5 +50,17 @@ namespace DateComponent_UnitTests
             var date_component = Calendar.calculate(date1, date2);
             Assert.True(date_component.Equals(new dateComponent(0, 0, 0, 0, false)));
         }
+
+        [Fact]
+        public void case6()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => {
+                var date1 = new DateTime(0, 0, 0, 0, 0, 0);
+                DateTime date2 = new DateTime(9999, 9999, 9999, 9999, 9999, 9999);
+                var date_component = Calendar.calculate(date1, date2);
+                Console.WriteLine(DateTime.MinValue.ToString("yyyy-MM-dd hh:mm:ss"));
+                Console.WriteLine(DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm:ss"));
+            });
+        }
     }
 }
