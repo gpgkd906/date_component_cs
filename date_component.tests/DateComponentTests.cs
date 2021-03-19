@@ -50,5 +50,15 @@ namespace DateComponent_UnitTests
             var date_component = Calendar.calculate(date1, date2);
             Assert.True(date_component.Equals(new dateComponent(0, 0, 0, 0, false)));
         }
+
+        [Fact]
+        public void case6()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => {
+                var date1 = new DateTime(9999, 99, 99, 0, 0, 0);
+                var date2 = new DateTime(9999, 99, 99, 0, 0, 0);
+                Calendar.calculate(date1, date2);
+            });
+        }
     }
 }
