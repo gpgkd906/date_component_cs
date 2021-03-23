@@ -1,7 +1,7 @@
 name: Backlog Notify
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
 
 jobs:
