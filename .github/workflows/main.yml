@@ -1,5 +1,7 @@
 name: Backlog Notify
-on: push
+on:
+  pull_request:
+    branches: [ main ]
 jobs:
   backlog:
     runs-on: ubuntu-latest
