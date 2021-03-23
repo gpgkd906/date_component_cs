@@ -1,11 +1,16 @@
 name: Backlog Notify
+
 on:
   pull_request:
     branches: [ main ]
+
 jobs:
   backlog:
+
     runs-on: ubuntu-latest
+
     steps:
+
       - name: Backlog Notify
         uses: bicstone/backlog-notify@master
         env:
