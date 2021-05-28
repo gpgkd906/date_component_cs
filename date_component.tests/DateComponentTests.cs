@@ -62,5 +62,25 @@ namespace DateComponent_UnitTests
                 Console.WriteLine(DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm:ss"));
             });
         }
+
+        [Fact]
+        public void case7()
+        {
+            var date1 = new DateTime(2015, 12, 30, 0, 0, 0);
+            var date2 = new DateTime(2016, 1, 1, 0, 0, 0);
+            var date_component = Calendar.calculate(date1, date2);
+            Assert.True(date_component.Equals(new dateComponent(0, 0, 2, 2, false)));
+        }
+
+
+        [Fact]
+        public void case8()
+        {
+            var date1 = new DateTime(2020, 2, 29, 0, 0, 0);
+            var date2 = new DateTime(2021, 2, 1, 0, 0, 0);
+            var date_component = Calendar.calculate(date1, date2);
+            Console.WriteLine(date_component);
+            Assert.True(date_component.Equals(new dateComponent(0, 11, 3, 338, false)));
+        }
     }
 }

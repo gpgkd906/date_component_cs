@@ -32,6 +32,7 @@ namespace DateComponent {
             var diff = date1.Subtract(date2);
             DateTime from, to;
             bool invert;
+            int to_year, to_month;
 
             if (diff.TotalSeconds <= 0) {
                 (from, to, invert) = (date1, date2, false);
@@ -42,20 +43,26 @@ namespace DateComponent {
             var diff_year = to.Year - from.Year;
             var diff_month = to.Month - from.Month;
             int interval_year, interval_month, interval_day;
+            var diff_day = to.Day - from.Day;
 
-            if (diff_month < 0) {
-                (interval_year, interval_month) = (diff_year -1, diff_month + 12);
+            if (to.Month > 1) {
+                (to_year, to_month) = (to.Year, to.Month - 1);
             } else {
-                (interval_year, interval_month) = (diff_year, diff_month);
+                (to_year, to_month) = (to.Year - 1, 12);
             }
 
-            var diff_day = to.Day - from.Day;
             if (diff_day < 0) {
-                (interval_day, interval_month) = (abs(new DateTime(to.Year, to.Month - 1, from.Day, to.Hour, to.Minute, to.Second).Subtract(to)), interval_month - 1);
+                (interval_day, interval_month) = (abs(new DateTime(to_year, to_month, from.Day, to.Hour, to.Minute, to.Second).Subtract(to)), diff_month - 1);
             } else {
-                interval_day = abs(new DateTime(to.Year, to.Month, from.Day, to.Hour, to.Minute, to.Second).Subtract(to));
+                (interval_day, interval_month) = (abs(new DateTime(to.Year, to.Month, from.Day, to.Hour, to.Minute, to.Second).Subtract(to)), diff_month);
             }
             
+            if (interval_month < 0) {
+                (interval_year, interval_month) = (diff_year -1, interval_month + 12);
+            } else {
+                (interval_year, interval_month) = (diff_year, interval_month);
+            }
+
             return new dateComponent(
                 interval_year,
                 interval_month,
